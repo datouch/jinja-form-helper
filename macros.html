@@ -7,12 +7,12 @@
 {% endmacro %}
 
 {% macro checkbox_tag(name, options, checked=None) %}
-{% for item in options %}
 <div class='checkbox-group' >
+{% for item in options %}
     {{ label(item[0], item[1]) }}
     <input name='{{name}}[]' type='checkbox' value='{{item[0]}}' {% if item[0] in checked %}checked='checked'{% endif %} {% for key in kwargs %}{{key}}='{{kwargs[key]|safe}}'{% endfor %}/>
-</div>
 {% endfor %}
+</div>
 {% endmacro %}
 
 {% macro radio_tag(name, options, default=None) %}
@@ -25,7 +25,7 @@
 {% endmacro %}
 
 {% macro button_tag(name, text, type="submit") %}
-<button name={{name}} type='{{type}}' {% for key in kwargs %}{{key}}='{{kwargs[key]|safe}}'{% endfor %} >{{ text if text is defined and text != "" else name|capitalize() }}</button>
+<button name={{name}} type='{{type}}' {% for key in kwargs %}{{key}}='{{kwargs[key]|safe}}'{% endfor %} >{{ text if text is defined and text != "" else (name|capitalize()) }}</button>
 {% endmacro %}
 
 {% macro input_tag(name, type="text") %}
@@ -37,7 +37,7 @@
 {% endmacro %}
 
 {% macro label(for_name, title) %}
-<label for='{{for_name}}' {% for key in kwargs %}{{key}}='{{kwargs[key]|safe}}'{% endfor %} >{{title if title is defined and title != "" else for_name|capitalize()}}</label>
+<label for='{{for_name}}' {% for key in kwargs %}{{key}}='{{kwargs[key]|safe}}'{% endfor %} >{{ (title) if (title is defined and title != "") else (for_name|capitalize()) }}</label>
 {% endmacro %}
 
 {#
@@ -46,21 +46,21 @@
 
 {% macro select(name, options, default=None) %}
 <div class='group'>
-    {{ label(name, kwargs['title']|capitalize()) }}
+    {{ label(name, kwargs['title']) }}
     {{ select_tag(name, options, default) }}
 </div>
 {% endmacro %}
 
 {% macro input(name, type="text") %}
 <div class='group' >
-    {{ label(name, kwargs['title']|capitalize()) }}
+    {{ label(name, kwargs['title']) }}
     {{ input_tag(name, type, **kwargs) }}
 </div>
 {% endmacro %}
 
 {% macro textarea(name) %}
 <div class='group' >
-    {{ label(name, kwargs['title']|capitalize()) }}
+    {{ label(name, kwargs['title']) }}
     {{ textarea_tag(name, kwargs['value']) }}
 </div>
 {% endmacro %}
