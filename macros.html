@@ -7,21 +7,25 @@
 {% endmacro %}
 
 {% macro checkbox_tag(name, options, checked=None) %}
-<div class='checkbox-group' >
+<div class='checkboxs'>
 {% for item in options %}
+<div class='checkbox-group' >
     {{ label(item[0], item[1]) }}
     <input name='{{name}}[]' type='checkbox' value='{{item[0]}}' {% if item[0] in checked %}checked='checked'{% endif %} {% for key in kwargs %}{{key}}='{{kwargs[key]|safe}}'{% endfor %}/>
+</div>
 {% endfor %}
 </div>
 {% endmacro %}
 
 {% macro radio_tag(name, options, default=None) %}
+<div class='radios' >
 {% for item in options %}
 <div class='radio-group' >
     {{ label(item[0], item[1]) }}
     <input name='{{name}}[]' type='radio' value='{{item[0]}}' {% if item[0] == default %}checked='checked'{% endif %} {% for key in kwargs %}{{key}}='{{kwargs[key]|safe}}'{% endfor %}/>
 </div>
 {% endfor %}
+</div>
 {% endmacro %}
 
 {% macro button_tag(name, text, type="submit") %}
